@@ -85,10 +85,6 @@
 }
 
 @media (max-width: 480px) {
-  /* .questionInputContainer {
-    left: 5%; 
-    right: 5%; 
-  } */
   .verificationText {
     font-size: 12px;
     color: #666;

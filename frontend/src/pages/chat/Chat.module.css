@@ -56,23 +56,18 @@
   color: #616161;
 }
 
+@media (max-width: 600px) {
+  .chatEmptyStateSubtitle {
+    font-size: 14px;
+    padding-left: 40px;  
+    padding-right: 40px;
+  }
+}
+
 .chatIcon {
   height: 62px;
   width: auto;
 }
-
-/* .chatMessageStream {
-  flex-grow: 1;
-  max-width: 2056px;
-  width: 100%;
-  overflow-y: auto;
-  padding-left: 345px;
-  padding-right: 335px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 24px;
-} */
-
 
 .chatMessageStream {
   flex-grow: 1;
