@@ -44,8 +44,19 @@
   margin-right: 20px;
 }
 
-.shareButtonText {
-  font-size: px; /* Adjust this value to your desired font size */
+
+.customPrimaryButton {
+  background-color: #236192; 
+  border-color: #236192;
+  color: white; 
+}
+
+.customPrimaryButton:hover {
+  background-color: #154671; 
+  border-color: #154671;
+}
+.customPrimaryButton i {
+  color: white;
 }
 
 @media (max-width: 480px) {

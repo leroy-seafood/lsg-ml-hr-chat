@@ -66,21 +66,12 @@ const Layout = () => {
                 text={appStateContext?.state?.isChatHistoryOpen ? hideHistoryLabel : showHistoryLabel}
               />
             )}
-              <PrimaryButton
-                text={shareLabel}
-                onClick={handleInfoClick}
-                iconProps={{ iconName: 'Feedback' }}
-                styles={{
-                  root: {
-                    backgroundColor: '#0078d4',
-                    borderColor: '#0078d4',
-                  },
-                  rootHovered: {
-                    backgroundColor: '#106ebe',
-                    borderColor: '#106ebe',
-                  }
-                }}
-              />
+            <PrimaryButton
+              text={shareLabel}
+              onClick={handleInfoClick}
+              iconProps={{ iconName: 'Feedback' }}
+              className={styles.customPrimaryButton}
+            />
           </Stack>
         </Stack>
       </header>

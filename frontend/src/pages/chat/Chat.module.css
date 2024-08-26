@@ -61,16 +61,37 @@
   width: auto;
 }
 
+/* .chatMessageStream {
+  flex-grow: 1;
+  max-width: 2056px;
+  width: 100%;
+  overflow-y: auto;
+  padding-left: 345px;
+  padding-right: 335px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+} */
+
+
 .chatMessageStream {
   flex-grow: 1;
   max-width: 2056px;
   width: 100%;
   overflow-y: auto;
-  padding-left: 145px;
-  padding-right: 135px;
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+  padding-left: calc(50% - 513px);
+  padding-right: calc(50% - 513px);
+}
+
+
+@media (max-width: 2056px) {
+  .chatMessageStream{
+    left: 345px;
+    right: 335px;
+  }
 }
 
 /* WebKit browsers (Chrome, Safari) */
@@ -97,21 +118,7 @@
   scrollbar-color: #888 #f1f1f1; 
 }
 
-@media (max-width: 1600px) {
-  .chatMessageStream {
-    padding-left: 125px;
-    padding-right: 115px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .chatMessageStream {
-    padding-left: 115px;
-    padding-right: 105px;
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 1050px) {
   .chatMessageStream {
     padding-left: 23px;
     padding-right: 23px;
