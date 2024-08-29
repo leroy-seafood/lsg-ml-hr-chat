@@ -3,7 +3,7 @@
   position: fixed;
   left: calc(50% - 513px);
   right: calc(50% - 513px);
-  bottom: 20px;
+  bottom: 25px;
   background: #ffffff;
   border: 1px solid #e0e0e0; 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 

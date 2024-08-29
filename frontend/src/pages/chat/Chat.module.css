@@ -192,22 +192,6 @@
   margin-top: 8px;
 }
 
-.clearChatBroom {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  left: -5px;
-  top: 13px;
-  color: #ffffff;
-  border-radius: 4px;
-  z-index: 10;
-}
-
 .clearChatBroomNoCosmos {
   box-sizing: border-box;
   display: flex;
@@ -215,14 +199,31 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   left: -5px;
-  top: 66px;
+  top: 50px;
   color: #ffffff;
   border-radius: 4px;
   z-index: 10;
 }
+
+/* 
+.clearChatBroom {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  left: -5px;
+  top: 13px;
+  color: #ffffff;
+  border-radius: 4px;
+  z-index: 10;
+} */
 
 .newChatIcon {
   box-sizing: border-box;

@@ -59,6 +59,14 @@
   color: white;
 }
 
+
+@media (max-width: 480px) {
+  .customPrimaryButton {
+    min-width: 40px; 
+    width: auto; 
+  }
+}
+
 @media (max-width: 480px) {
   .headerTitleContainer {
     margin-left: 4px;

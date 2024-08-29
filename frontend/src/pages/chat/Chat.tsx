@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useContext, useLayoutEffect } from 'react'
 import { CommandBarButton, IconButton, Dialog, DialogType, Stack } from '@fluentui/react'
-import { SquareRegular, ShieldLockRegular, ErrorCircleRegular } from '@fluentui/react-icons'
+import { SquareRegular, ShieldLockRegular, ErrorCircleRegular, ChatAdd24Regular  } from '@fluentui/react-icons'
 
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -148,7 +148,7 @@ const Chat = () => {
     if (assistantMessage.content.trim() === "The requested information is not found in the retrieved data. Please try another query or topic.") {
       const detectLanguage = (text: string): 'no' | 'ny' | 'none' => {
         const norwegianWords = ['hei', 'hva', 'hvordan', 'hvor', "hvem", 'kan', 'du', 'jeg', 'hjelp', "hjelpe", 
-          'takk', 'informasjon', 'vennligst', 'forklar', 'hvorfor', 'og', 'skal', 'eller', 'til', 'når', 'hvilken', 'hvilket', 'hvilke', 'spørsmål', 'svar'];
+          'takk', 'informasjon', 'vennligst', 'forklar', 'hvorfor', 'og', 'skal', 'eller', 'til', 'er', 'med', 'når', 'hvilken', 'hvilket', 'hvilke', 'spørsmål', 'svar'];
     
         const nynorskWords = ['kva', 'korleis', 'kvar', 'kven', 'eg', 'kvifor', 'eit', 'nokre'];
     
@@ -879,7 +879,7 @@ const Chat = () => {
                 </Stack>
               )}
               <Stack>
-                {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && (
+                {/* {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && (
                   <CommandBarButton
                     role="button"
                     styles={{
@@ -904,23 +904,21 @@ const Chat = () => {
                     disabled={disabledButton()}
                     aria-label="start a new chat button"
                   />
-                )}
+                )} */}
                 {/* <CommandBarButton
                   role="button"
                   styles={{
-                    icon: {
-                      color: '#FFFFFF'
-                    },
-                    iconDisabled: {
-                      color: '#BDBDBD !important'
-                    },
                     root: {
                       color: '#FFFFFF',
-                      background:
-                        'radial-gradient(109.81% 107.82% at 100.1% 90.19%, #0F6CBD 33.63%, #2D87C3 70.31%, #8DDDD8 100%)'
+                      background: '#236192', // Default background color
+                      selectors: {
+                        ':hover:not(:disabled)': {
+                          background: '#154671', // Hover background color when not disabled
+                        }
+                      }
                     },
                     rootDisabled: {
-                      background: '#F0F0F0'
+                      background: '#80808080'
                     }
                   }}
                   className={
@@ -928,7 +926,8 @@ const Chat = () => {
                       ? styles.clearChatBroom
                       : styles.clearChatBroomNoCosmos
                   }
-                  iconProps={{ iconName: 'Broom' }}
+                  iconProps={{ iconName: 'ChatAdd' }}
+                  onRenderIcon={() => <ChatAdd24Regular color="#FFFFFF" />}
                   onClick={
                     appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured
                       ? clearChat
