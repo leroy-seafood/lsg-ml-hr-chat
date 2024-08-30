@@ -68,7 +68,7 @@ jobs:
       - name: Read configuration
         id: read_config
         run: |
-          config=$(cat path/to/your/config.json)
+          config=$(cat .github/workflows/config.json)
           echo "app_settings=$config" >> $GITHUB_OUTPUT
 
       - name: Set Startup Command (HR)
