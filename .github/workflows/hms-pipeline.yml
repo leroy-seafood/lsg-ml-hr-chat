@@ -4,26 +4,31 @@ on:
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v4
+
+      - name: Set up Python version
+        uses: actions/setup-python@v1
         with:
           python-version: '3.11'
+
       - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
+      
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install -r requirements.txt
+        
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
@@ -36,9 +41,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: production
-      url: ${{ steps.deploy-to-webapp-hr.outputs.webapp-url }}
-    
+      name: ${{ github.event_name == 'release' && github.event.action == 'published' && 'prod' || 'test' }}
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     permissions:
       id-token: write 
       contents: read
@@ -48,46 +53,55 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: python-app
+
       - name: Unzip artifact for deployment
         run: unzip release.zip
+
+
       - name: Azure Login
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - name: Read config.json
-        id: read_config
-        run: echo "config=$(cat config.json | jq -c .)" >> $GITHUB_OUTPUT
 
-      # HR Pipeline
       - name: Set Startup Command (HR)
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
+        
+
       - name: Deploy to Azure Web App (HR)
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp-hr
         with:
           app-name: ${{ vars.HR_WEBAPP_NAME }}
           resource-group-name: ${{ vars.HR_RESOURCE_GROUP }}
+
       - name: Set App Settings (HR)
         uses: azure/appservice-settings@v1
         with:
           app-name: ${{ vars.HR_WEBAPP_NAME }}
-          app-settings-json: ${{ steps.read_config.outputs.config }}
+          app-settings-json: ${{ steps.read_config.outputs.app_settings }}
 
-      # HMS Pipeline
+
+# HMS Pipeline
+
       - name: Set Startup Command (HMS)
         run: |
           az webapp config set --name ${{ vars.HMS_WEBAPP_NAME }} --resource-group ${{ vars.HMS_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
+          
+  
       - name: Deploy to Azure Web App (HMS)
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp-hms
         with:
           app-name: ${{ vars.HMS_WEBAPP_NAME }}
           resource-group-name: ${{ vars.HMS_RESOURCE_GROUP }}
+
       - name: Set App Settings (HMS)
         uses: azure/appservice-settings@v1
         with:
           app-name: ${{ vars.HMS_WEBAPP_NAME }}
-          app-settings-json: ${{ steps.read_config.outputs.config }}
+          app-settings-json: ${{ steps.read_config.outputs.app_settings }}
+
+
