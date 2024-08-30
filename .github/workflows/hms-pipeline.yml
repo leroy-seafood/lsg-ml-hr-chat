@@ -65,6 +65,12 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Read configuration
+        id: read_config
+        run: |
+          config=$(cat path/to/your/config.json)
+          echo "app_settings=$config" >> $GITHUB_OUTPUT
+
       - name: Set Startup Command (HR)
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
@@ -82,7 +88,6 @@ jobs:
         with:
           app-name: ${{ vars.HR_WEBAPP_NAME }}
           app-settings-json: ${{ steps.read_config.outputs.app_settings }}
-
 
 # HMS Pipeline
 
