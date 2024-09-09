@@ -70,27 +70,13 @@ jobs:
           config=$(cat .github/workflows/config.json)
           echo "app_settings=$config" >> $GITHUB_OUTPUT
 
-          - name: Debug - List directory contents
-          run: |
-            echo "Current directory:"
-            pwd
-            echo "Contents of current directory:"
-            ls -R
+      - name: Debug - List directory contents
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Contents of current directory:"
+          ls -R
     
-        - name: Load config.json
-          run: |
-            echo "Attempting to read config.json"
-            if [ -f ".github/workflows/config.json" ]; then
-              config=$(cat .github/workflows/config.json)
-              echo "app_settings=$config" >> $GITHUB_OUTPUT
-              echo "Successfully read config.json"
-            else
-              echo "config.json not found in .github/workflows/"
-              echo "Contents of .github/workflows/:"
-              ls -l .github/workflows/
-              exit 1
-            fi
-
       - name: Set Startup Command (HR)
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
