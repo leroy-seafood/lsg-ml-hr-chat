@@ -65,6 +65,19 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+
+          # - name: Debug - List directory contents
+          # run: |
+          #   echo "Current directory:"
+          #   pwd
+          #   echo "Contents of current directory:"
+          #   ls -R  
+
+      - name: Read configuration
+        run: |
+          config=$(cat config.json)
+          echo "app_settings=$config" >> $GITHUB_OUTPUT
+
       - name: Debug - List directory contents
         run: |
           echo "Current directory:"
