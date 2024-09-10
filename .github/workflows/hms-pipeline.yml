@@ -67,6 +67,7 @@ jobs:
 
 
       - name: Read configuration
+        id: read_config
         run: |
           content=$(cat config.json)
           content="${content//'%'/'%25'}"
