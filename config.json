@@ -1,4 +1,4 @@
-'[
+[
       {
         "name": "DEBUG",
         "value": "True"
@@ -119,4 +119,4 @@
         "name": "PROMPTFLOW_RESPONSE_FIELD_NAME",
         "value": "answer"
       }
-]'
+]
