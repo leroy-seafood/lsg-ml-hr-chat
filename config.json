@@ -1,122 +1,45 @@
-'[
-      {
-        "name": "DEBUG",
-        "value": "True"
-      },
-      {
-        "name": "AZURE_OPENAI_TEMPERATURE",
-        "value": "0"
-      },
-      {
-        "name": "AZURE_OPENAI_TOP_P",
-        "value": "0"
-      },
-      {
-        "name": "AZURE_OPENAI_MAX_TOKENS",
-        "value": "800"
-      },
-      {
-        "name": "AZURE_OPENAI_PREVIEW_API_VERSION",
-        "value": "2024-05-01-preview"
-      },
-      {
-        "name": "AZURE_OPENAI_STREAM",
-        "value": "True"
-      },
-      {
-        "name": "AZURE_COSMOSDB_DATABASE",
-        "value": "db_conversation_history"
-      },
-      {
-        "name": "AZURE_COSMOSDB_CONVERSATIONS_CONTAINER",
-        "value": "conversations"
-      },
-      {
-        "name": "DATASOURCE_TYPE",
-        "value": "AzureCognitiveSearch"
-      },
-      {
-        "name": "SEARCH_TOP_K",
-        "value": "5"
-      },
-      {
-        "name": "SEARCH_STRICTNESS",
-        "value": "3"
-      },
-      {
-        "name": "SEARCH_ENABLE_IN_DOMAIN",
-        "value": "True"
-      },
-      {
-        "name": "AZURE_SEARCH_USE_SEMANTIC_SEARCH",
-        "value": "True"
-      },
-      {
-        "name": "AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG",
-        "value": "my-semantic-config"
-      },
-      {
-        "name": "AZURE_SEARCH_INDEX_IS_PRECHUNKED",
-        "value": "True"
-      },
-      {
-        "name": "AZURE_SEARCH_TOP_K",
-        "value": "5"
-      },
-      {
-        "name": "AZURE_SEARCH_ENABLE_IN_DOMAIN",
-        "value": "True"
-      },
-      {
-        "name": "AZURE_SEARCH_CONTENT_COLUMNS",
-        "value": "chunk"
-      },
-      {
-        "name": "AZURE_SEARCH_FILENAME_COLUMN",
-        "value": "chunk_id"
-      },
-      {
-        "name": "AZURE_SEARCH_TITLE_COLUMN",
-        "value": "title"
-      },
-      {
-        "name": "AZURE_SEARCH_VECTOR_COLUMNS",
-        "value": "vector"
-      },
-      {
-        "name": "AZURE_SEARCH_QUERY_TYPE",
-        "value": "vectorSemanticHybrid"
-      },
-      {
-        "name": "AZURE_SEARCH_STRICTNESS",
-        "value": "3"
-      },
-      {
-        "name": "ELASTICSEARCH_TOP_K",
-        "value": "5"
-      },
-      {
-        "name": "ELASTICSEARCH_ENABLE_IN_DOMAIN",
-        "value": "True"
-      },
-      {
-        "name": "ELASTICSEARCH_STRICTNESS",
-        "value": "3"
-      },
-      {
-        "name": "USE_PROMPTFLOW",
-        "value": "False"
-      },
-      {
-        "name": "PROMPTFLOW_RESPONSE_TIMEOUT",
-        "value": "120"
-      },
-      {
-        "name": "PROMPTFLOW_REQUEST_FIELD_NAME",
-        "value": "question"
-      },
-      {
-        "name": "PROMPTFLOW_RESPONSE_FIELD_NAME",
-        "value": "answer"
-      }
-]'
+{
+  "DEBUG": "True",
+  "AZURE_OPENAI_TEMPERATURE": "0",
+  "AZURE_OPENAI_TOP_P": "0",
+  "AZURE_OPENAI_MAX_TOKENS": "800",
+  "AZURE_OPENAI_PREVIEW_API_VERSION": "2024-05-01-preview",
+  "AZURE_OPENAI_STREAM": "True",
+  "AZURE_COSMOSDB_DATABASE": "db_conversation_history",
+  "AZURE_COSMOSDB_CONVERSATIONS_CONTAINER": "conversations",
+  "DATASOURCE_TYPE": "AzureCognitiveSearch",
+  "SEARCH_TOP_K": "5",
+  "SEARCH_STRICTNESS": "3",
+  "SEARCH_ENABLE_IN_DOMAIN": "True",
+  "AZURE_SEARCH_USE_SEMANTIC_SEARCH": "True",
+  "AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG": "my-semantic-config",
+  "AZURE_SEARCH_INDEX_IS_PRECHUNKED": "True",
+  "AZURE_SEARCH_TOP_K": "5",
+  "AZURE_SEARCH_ENABLE_IN_DOMAIN": "True",
+  "AZURE_SEARCH_CONTENT_COLUMNS": "chunk",
+  "AZURE_SEARCH_FILENAME_COLUMN": "chunk_id",
+  "AZURE_SEARCH_TITLE_COLUMN": "title",
+  "AZURE_SEARCH_VECTOR_COLUMNS": "vector",
+  "AZURE_SEARCH_QUERY_TYPE": "vectorSemanticHybrid",
+  "AZURE_SEARCH_STRICTNESS": "3",
+  "ELASTICSEARCH_TOP_K": "5",
+  "ELASTICSEARCH_ENABLE_IN_DOMAIN": "True",
+  "ELASTICSEARCH_STRICTNESS": "3",
+  "USE_PROMPTFLOW": "False",
+  "PROMPTFLOW_RESPONSE_TIMEOUT": "120",
+  "PROMPTFLOW_REQUEST_FIELD_NAME": "question",
+  "PROMPTFLOW_RESPONSE_FIELD_NAME": "answer",
+  "AZURE_OPENAI_MODEL": "${{ vars.AZURE_OPENAI_MODEL }}",
+  "AZURE_OPENAI_MODEL_NAME": "${{ vars.AZURE_OPENAI_MODEL }}",
+  "AZURE_OPENAI_RESOURCE": "${{ vars.AZURE_OPENAI_RESOURCE }}",
+  "AZURE_OPENAI_ENDPOINT": "${{ vars.AZURE_OPENAI_ENDPOINT }}",
+  "AZURE_OPENAI_EMBEDDING_NAME": "${{ vars.AZURE_OPENAI_EMBEDDING_NAME }}",
+  "AZURE_OPENAI_EMBEDDING_ENDPOINT": "${{ vars.AZURE_OPENAI_ENDPOINT }}",
+  "AZURE_OPENAI_EMBEDDING_KEY": "${{ secrets.AZURE_OPENAI_KEY }}",
+  "AZURE_SEARCH_SERVICE": "${{ vars.AZURE_SEARCH_SERVICE }}",
+  "AZURE_OPENAI_SYSTEM_MESSAGE": "${{ vars.AZURE_OPENAI_SYSTEM_MESSAGE }}",
+  "AZURE_SEARCH_SERVICE_ENDPOINT": "https://${{ vars.AZURE_SEARCH_SERVICE }}.search.windows.net",
+  "AZURE_SEARCH_INDEX": "${{ vars.AZURE_SEARCH_INDEX }}",
+  "AZURE_SEARCH_KEY": "${{ secrets.AZURE_SEARCH_KEY }}",
+  "AZURE_OPENAI_KEY": "${{ secrets.AZURE_OPENAI_KEY }}"
+}
