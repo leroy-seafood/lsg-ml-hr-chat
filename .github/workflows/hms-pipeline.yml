@@ -65,26 +65,17 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+
       - name: Read configuration
         run: |
           content=$(cat config.json)
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          content="${content//'"'/'%22'}"
-          echo "config=$content" >> $GITHUB_OUTPUT
-          
+          echo 'app_settings<<EOF' >> $GITHUB_OUTPUT
+          echo '$content' >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
 
-        - name: Read configuration
-          run: |
-            content=$(cat config.json)
-            content="${content//'%'/'%25'}"
-            content="${content//$'\n'/'%0A'}"
-            content="${content//$'\r'/'%0D'}"
-            echo 'app_settings<<EOF' >> $GITHUB_OUTPUT
-            echo '$content' >> $GITHUB_OUTPUT
-            echo 'EOF' >> $GITHUB_OUTPUT
-            
       - name: Set Startup Command (HR)
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
