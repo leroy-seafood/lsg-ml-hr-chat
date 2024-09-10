@@ -74,8 +74,9 @@ jobs:
           # Read the content of config.json
           content=$(cat config.json)
           
-          processed_content=$(echo "$content" | sed -E 's/\$\{\{ *vars\.([A-Za-z0-9_]+) *\}\}/'"${{ vars.\\1 }}"'/g')
-          processed_content=$(echo "$processed_content" | sed -E 's/\$\{\{ *secrets\.([A-Za-z0-9_]+) *\}\}/'"${{ secrets.\\1 }}"'/g')
+          # Replace placeholders with actual values
+          processed_content=$(echo "$content" | sed -E 's/\$\{\{ *vars\.([A-Za-z0-9_]+) *\}\}/'"${{ vars.\1 }}"'/g')
+          processed_content=$(echo "$processed_content" | sed -E 's/\$\{\{ *secrets\.([A-Za-z0-9_]+) *\}\}/'"${{ secrets.\1 }}"'/g')
           
           echo "Transforming JSON to required format:"
           transformed_content=$(echo "$processed_content" | jq -c 'to_entries | map({name: .key, value: .value})')
