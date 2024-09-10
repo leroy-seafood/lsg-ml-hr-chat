@@ -69,7 +69,7 @@ jobs:
       - name: Generate App Settings
         id: generate_settings
         run: |
-          content=$(cat ./app-settings-template.json)
+          content=$(cat config.json)
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
