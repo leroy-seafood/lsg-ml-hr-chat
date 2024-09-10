@@ -69,11 +69,22 @@ jobs:
       - name: Generate App Settings
         id: generate_settings
         run: |
+          echo "Processing config.json file:"
+          
+          # Read the content of config.json
           content=$(cat config.json)
-          echo "settings<<EOF" >> $GITHUB_OUTPUT
-          echo "$content" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
+          
+          processed_content=$(echo "$content" | sed -E 's/\$\{\{ *vars\.([A-Za-z0-9_]+) *\}\}/'"${{ vars.\\1 }}"'/g')
+          processed_content=$(echo "$processed_content" | sed -E 's/\$\{\{ *secrets\.([A-Za-z0-9_]+) *\}\}/'"${{ secrets.\\1 }}"'/g')
+          
+          echo "Transforming JSON to required format:"
+          transformed_content=$(echo "$processed_content" | jq -c 'to_entries | map({name: .key, value: .value})')
+          
+          echo "Transformed content:"
+          echo "$transformed_content" | jq .
+          
+          echo "settings=$transformed_content" >> $GITHUB_OUTPUT
+          
       - name: Set Startup Command (HR)
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
