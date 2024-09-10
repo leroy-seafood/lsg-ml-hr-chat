@@ -73,9 +73,14 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo 'app_settings<<EOF' >> $GITHUB_OUTPUT
-          echo '$content' >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+          echo "app_settings<<EOF" >> $GITHUB_OUTPUT
+          echo "$content" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Debug - Print app_settings
+        run: |
+          echo "app_settings content:"
+          echo "${{ steps.read_config.outputs.app_settings }}"
 
       - name: Set Startup Command (HR)
         run: |
