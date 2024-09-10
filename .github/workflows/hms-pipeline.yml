@@ -102,6 +102,7 @@ jobs:
           app-name: ${{ vars.HR_WEBAPP_NAME }}
           app-settings-json: ${{ steps.generate_settings.outputs.settings }}
 
+          
 # # # HMS Pipeline
 
 #       - name: Set Startup Command (HMS)
