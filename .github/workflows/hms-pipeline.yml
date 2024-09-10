@@ -82,42 +82,42 @@ jobs:
           content="${content//'"'/'%22'}"
           echo "config=$content" >> $GITHUB_OUTPUT
 
-      # - name: Set Startup Command (HR)
-      #   run: |
-      #     az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
+      - name: Set Startup Command (HR)
+        run: |
+          az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
         
 
-      # - name: Deploy to Azure Web App (HR)
-      #   uses: azure/webapps-deploy@v2
-      #   id: deploy-to-webapp-hr
-      #   with:
-      #     app-name: ${{ vars.HR_WEBAPP_NAME }}
-      #     resource-group-name: ${{ vars.HR_RESOURCE_GROUP }}
+      - name: Deploy to Azure Web App (HR)
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp-hr
+        with:
+          app-name: ${{ vars.HR_WEBAPP_NAME }}
+          resource-group-name: ${{ vars.HR_RESOURCE_GROUP }}
 
-      # - name: Set App Settings (HR)
-      #   uses: azure/appservice-settings@v1
-      #   with:
-      #     app-name: ${{ vars.HR_WEBAPP_NAME }}
-      #     app-settings-json: ${{ steps.read_config.outputs.app_settings }}
+      - name: Set App Settings (HR)
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.HR_WEBAPP_NAME }}
+          app-settings-json: ${{ steps.read_config.outputs.app_settings }}
 
 # HMS Pipeline
 
-      - name: Set Startup Command (HMS)
-        run: |
-          az webapp config set --name ${{ vars.HMS_WEBAPP_NAME }} --resource-group ${{ vars.HMS_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
+      # - name: Set Startup Command (HMS)
+      #   run: |
+      #     az webapp config set --name ${{ vars.HMS_WEBAPP_NAME }} --resource-group ${{ vars.HMS_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
           
   
-      - name: Deploy to Azure Web App (HMS)
-        uses: azure/webapps-deploy@v2
-        id: deploy-to-webapp-hms
-        with:
-          app-name: ${{ vars.HMS_WEBAPP_NAME }}
-          resource-group-name: ${{ vars.HMS_RESOURCE_GROUP }}
+      # - name: Deploy to Azure Web App (HMS)
+      #   uses: azure/webapps-deploy@v2
+      #   id: deploy-to-webapp-hms
+      #   with:
+      #     app-name: ${{ vars.HMS_WEBAPP_NAME }}
+      #     resource-group-name: ${{ vars.HMS_RESOURCE_GROUP }}
 
-      - name: Set App Settings (HMS)
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: ${{ vars.HMS_WEBAPP_NAME }}
-          app-settings-json: ${{ steps.read_config.outputs.app_settings }}
+      # - name: Set App Settings (HMS)
+      #   uses: azure/appservice-settings@v1
+      #   with:
+      #     app-name: ${{ vars.HMS_WEBAPP_NAME }}
+      #     app-settings-json: ${{ steps.read_config.outputs.app_settings }}
 
 
