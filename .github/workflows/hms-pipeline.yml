@@ -98,7 +98,7 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: ${{ vars.HR_WEBAPP_NAME }}
-          app-settings-json: '${{steps.read_config.outputs.app_settings}}'
+          app-settings-json: ${{ steps.read_config.outputs.app_settings }}
 
 # HMS Pipeline
 
@@ -118,6 +118,6 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: ${{ vars.HMS_WEBAPP_NAME }}
-          app-settings-json: '${{steps.read_config.outputs.app_settings}}'
+          app-settings-json: ${{ steps.read_config.outputs.app_settings }}
 
 
