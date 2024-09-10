@@ -70,10 +70,9 @@ jobs:
         id: generate_settings
         run: |
           content=$(cat config.json)
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=settings::$content"
+          echo "settings<<EOF" >> $GITHUB_OUTPUT
+          echo "$content" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Set Startup Command (HR)
         run: |
