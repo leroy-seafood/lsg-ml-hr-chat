@@ -28,7 +28,14 @@ jobs:
         
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
-        #run: zip -r release.zip * -x "venv/*"
+
+
+      # - name: Zip artifact for deployment
+      #   run: |
+      #     zip -r release.zip requirements.txt
+      #     zip -r release.zip * -x "venv/*"
+      #     echo "Zip file contents:"
+      #     unzip -l release.zip
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
@@ -70,7 +77,10 @@ jobs:
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} \
           --resource-group ${{ vars.HR_RESOURCE_GROUP }} \
-          --startup-file "python3 -m gunicorn app:app"
+          --startup-file "python3 -m gunicorn -k uvicorn.workers.UvicornWorker app:app"
+        
+        # "python3 -m gunicorn app:app"
+
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
