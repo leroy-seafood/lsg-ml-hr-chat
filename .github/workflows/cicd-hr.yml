@@ -67,8 +67,9 @@ jobs:
 
       - name: Set Startup Command
         run: |
-          az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} --resource-group ${{ vars.HR_RESOURCE_GROUP }} --startup-file "python3 -m gunicorn app:app"
-        
+          az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} \
+          --resource-group ${{ vars.HR_RESOURCE_GROUP }} \
+          --startup-file "python3 -m gunicorn app:app"
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
