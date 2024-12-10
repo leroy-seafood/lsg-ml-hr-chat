@@ -29,7 +29,6 @@ jobs:
       # - name: Zip artifact for deployment
       #   run: zip release.zip ./* -r
 
-
       - name: Zip artifact for deployment
         run: |
           zip -r release.zip requirements.txt
@@ -63,7 +62,6 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -71,15 +69,21 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+
+      - name: Configure Python runtime
+        run: |
+          az webapp config appsettings set --name ${{ vars.HR_WEBAPP_NAME }} \
+          --resource-group ${{ vars.HR_RESOURCE_GROUP }} \
+          --settings \
+          SCM_DO_BUILD_DURING_DEPLOYMENT=true \
+          PYTHON_ENABLE_GUNICORN=true    
+
       - name: Set Startup Command
         run: |
           az webapp config set --name ${{ vars.HR_WEBAPP_NAME }} \
           --resource-group ${{ vars.HR_RESOURCE_GROUP }} \
-          --startup-file "python3 -m gunicorn -k uvicorn.workers.UvicornWorker app:app"
-        
-        # "python3 -m gunicorn app:app"
-
-
+          --startup-file "python3 -m gunicorn app:app"
+      
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
